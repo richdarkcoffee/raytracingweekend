@@ -2,7 +2,9 @@ import sys
 import random
 import array
 import numpy
-import Image
+from PIL import Image
+#This didn't work. But then I found this article and it did
+#https://github.com/python-pillow/Pillow/issues/3068
 
 nx = 200
 ny = 100
