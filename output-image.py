@@ -13,7 +13,7 @@ j = ny + 1
 i = 0
 ppm_header = 'P6 {nx} {ny} {255}\n'
 
-print "P3\n" + str(nx) + " " + str(ny) + "\n255"
+print( "P3\n" + str(nx) + " " + str(ny) + "\n255")
 
 image = array.array('B',[0,0,0] * nx * ny)
 
@@ -26,4 +26,4 @@ for j in range(ny,0,-1) :
         ir = int(255.99*r)
         ig = int(255.99*g)
         ib = int(255.99*b)       
-        print str(ir) + " " + str(ig) + " " + str(ib)
+        print( str(ir) + " " + str(ig) + " " + str(ib))
