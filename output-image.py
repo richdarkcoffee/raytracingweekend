@@ -19,7 +19,8 @@ i = 0
 
 print( "P3\n" + str(nx) + " " + str(ny) + "\n255")
 
-img = Image.new('RGBA', (nx, ny), 'white')    
+img = Image.new('RGBA', (nx, ny), 'white')   
+#http://zetcode.com/python/pillow/ (Search for Drawing to Pillow image) 
 idraw = ImageDraw.Draw(img)
 #for j in range(ny,0,-1) :
 for j in range(0,ny) :
@@ -30,6 +31,7 @@ for j in range(0,ny) :
         ir = int(255.99*r)
         ig = 255 - int(255.99*g)
         ib = int(255.99*b)       
+        # https://pillow.readthedocs.io/en/5.2.x/reference/ImageDraw.html#methods
         idraw.point((i,j),fill=(ir,ig,ib,255))
 
 img.save('firstimage.png')
