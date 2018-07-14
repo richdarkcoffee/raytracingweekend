@@ -20,26 +20,104 @@ class vec3:
         self.b = z
 
     def __add__(self, other):
-        return vec3(self.x+other.x, self.y+other.y, self.z+other.z)
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x+other, self.y+other, self.z+other)
+        else:
+            return vec3(self.x+other.x, self.y+other.y, self.z+other.z)
 
-#    def __add__(self, int scalar):
-#        return vec3(self.x+scalar, self.y+scalar, self.z+scalar)
+    def __radd__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x+other, self.y+other, self.z+other)
+        else:
+            return vec3(self.x+other.x, self.y+other.y, self.z+other.z)
 
     def __sub__(self, other):
-        return vec3(self.x - other.x, self.y - other.y, self.z - other.z)
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x-other, self.y-other, self.z-other)
+        else:
+            return vec3(self.x-other.x, self.y-other.y, self.z-other.z)
+
     def __mul__(self, other):
-        return vec3(self.x * other.x, self.y * other.y, self.z * other.z)
-    def __div__(self, other):
-        return vec3(self.x / other.x, self.y / other.y, self.z / other.z)
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x*other, self.y*other, self.z*other)
+        else:
+            return vec3(self.x*other.x, self.y*other.y, self.z*other.z)
+
+    def __truediv__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x/other, self.y/other, self.z/other)
+        else:
+            return vec3(self.x/other.x, self.y/other.y, self.z/other.z)
+
+    def __iadd__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x+other, self.y+other, self.z+other)
+        else:
+            return vec3(self.x+other.x, self.y+other.y, self.z+other.z)
+
+    def __isub__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x-other, self.y-other, self.z-other)
+        else:
+            return vec3(self.x-other.x, self.y-other.y, self.z-other.z)
+
+    def __imul__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x*other, self.y*other, self.z*other)
+        else:
+            return vec3(self.x*other.x, self.y*other.y, self.z*other.z)
+
+    def __itruediv__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x/other, self.y/other, self.z/other)
+        else:
+            return vec3(self.x/other.x, self.y/other.y, self.z/other.z)
+
+
     def __str__(self):
-        return 'vec3(%s,%s,%s)' % ('self.x','self.y','self.z')
+        return 'vec3(%s,%s,%s)' % (self.x,self.y,self.z)
 
+    def length(self):
+        return math.sqrt(self.x*self.x+self.y*self.y+self.z*self.z)
 
-#+ 	  __add__(self, other) 	 Addition
-#* 	  __mul__(self, other) 	 Multiplication
-#- 	  __sub__(self, other) 	 Subtraction
+    def dot(self, other):
+        return float(self.x*other.x + self.y*other.y + self.z*other.z)
+    
+    def cross(self, other):
+        return vec3((self.y*other.z - self.z*other.y), -(self.x*other.z - self.z*other.x), (self.x*other.y - self.y*other.x))
+
+    def make_unit_vector(self):
+        k = 1.0 / math.sqrt(self.x*self.x+self.y*self.y+self.z*self.z)
+        self.x*=k
+        self.y*=k
+        self.z*=k
+
+# Not sure why we have this function. Will look at when he calls it in the code later.
+    def unit_vector(other):
+        if type(other) not in (vec3):
+            return NotImplemented
+        else:
+            return other / other.length()
+    
 #% 	  __mod__(self, other) 	 Remainder
-#/ 	  __truediv__(self, other) 	 Division
 #< 	  __lt__(self, other) 	 Less than
 # <= 	  __le__(self, other) 	 Less than or equal to
 # == 	  __eq__(self, other) 	 Equal to
