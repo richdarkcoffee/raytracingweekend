@@ -91,6 +91,16 @@ class vec3:
         else:
             return vec3(self.x/other.x, self.y/other.y, self.z/other.z)
 
+    def __getitem__(self, key):
+        if key >= 3:
+            return NotImplemented
+        if key == 0:
+            return float(self.x)
+        if key == 1:
+            return float(self.y)
+        if key == 2:
+            return float(self.z)
+    
 
     def __str__(self):
         return 'vec3(%s,%s,%s)' % (self.x,self.y,self.z)
