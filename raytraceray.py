@@ -2,16 +2,19 @@ import sys
 import random
 import array
 import math
-import vec3 from raytracevec
+from raytracevec import vec3
 
 class ray:
+    A = vec3(0.0,0.0,0.0)
+    B = vec3(0.0,0.0,0.0)
+
     def __init__(self, a, b):
-        A = a
-        B = b
+        self.A = a
+        self.B = b
     def origin(self):
-        return A
+        return self.A
     def direction(self):
-        return B
+        return self.B
     def point_at_parameter(self,t):
-        return A + t*B
+        return self.A + t*self.B
 
