@@ -39,6 +39,7 @@ for j in range(0,ny) :
         r = ray(origin,lower_left_corner + horizontal*u + vertical*v)
         col = color(r)
         ir = int(255.99*col.x)
+         # Had to flip the direction of y in order to get the same picture
         ig = 255 - int(255.99*col.y)
         ib = int(255.99*col.z)
 

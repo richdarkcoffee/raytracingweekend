@@ -26,7 +26,6 @@ for j in range(0,ny) :
         #g = float(j) / float(ny)
         #b = 0.2
         ir = int(255.99*col.x)
-        # Had to flip the direction of y in order to get the same picture
         ig = 255 - int(255.99*col.y) 
         ib = int(255.99*col.z)       
         # https://pillow.readthedocs.io/en/5.2.x/reference/ImageDraw.html#methods
