@@ -27,6 +27,8 @@ class vec3:
         else:
             return vec3(self.x+other.x, self.y+other.y, self.z+other.z)
 
+#Added reverse add, reverse subtract, and reverse multiple to fix 
+#issue when multiplying a float by vec3 instead of vec3 by float.
     def __radd__(self, other):
         if type(other) not in (vec3,int,float):
             return NotImplemented

@@ -6,10 +6,27 @@ from raytraceray import ray
 import raytracevec
 
 # Added this function to the main because it didn't work when included
+# with import
+
 def unit_vector(v: vec3):
     return v / v.length()
+    
+def dot(a: vec3, b: vec3):
+    return float(a.x*b.x + a.y*b.y + a.z*b.z)
+
+def hit_sphere(center, radius, r: vec3):
+    oc = vec3(0,0,0)
+    oc = r.origin() - center
+    a = dot(r.direction(), r.direction())
+    b = 2.0 * dot(oc, r.direction())
+    c = dot(oc, oc) - radius*radius
+    discriminant = b*b - 4*a*c
+    return (discriminant > 0)
+
 
 def color(r: vec3):
+    if (hit_sphere(vec3(0,0,-1),0.5,r)):
+        return vec3(1.0,0.0,0.0)
     unit_direction = unit_vector(r.direction())
     # Found out that returning unit_direction.y() means something different
     # in python than in C++. Fixed the function by removing () per blog site
@@ -40,7 +57,7 @@ for j in range(0,ny) :
         col = color(r)
         ir = int(255.99*col.x)
          # Had to flip the direction of y in order to get the same picture
-        ig = 255 - int(255.99*col.y)
+        ig = int(255.99*col.y)
         ib = int(255.99*col.z)
 
         idraw.point((i,j),fill=(ir,ig,ib,255))
