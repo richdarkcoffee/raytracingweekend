@@ -43,6 +43,15 @@ class vec3:
         else:
             return vec3(self.x-other.x, self.y-other.y, self.z-other.z)
 
+    def __rsub__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x-other, self.y-other, self.z-other)
+        else:
+            return vec3(self.x-other.x, self.y-other.y, self.z-other.z)
+
+
     def __mul__(self, other):
         if type(other) not in (vec3,int,float):
             return NotImplemented
@@ -51,6 +60,15 @@ class vec3:
         else:
             return vec3(self.x*other.x, self.y*other.y, self.z*other.z)
 
+    def __rmul__(self, other):
+        if type(other) not in (vec3,int,float):
+            return NotImplemented
+        if type(other) in (int,float):
+            return vec3(self.x*other, self.y*other, self.z*other)
+        else:
+            return vec3(self.x*other.x, self.y*other.y, self.z*other.z)
+
+
     def __truediv__(self, other):
         if type(other) not in (vec3,int,float):
             return NotImplemented
@@ -58,6 +76,7 @@ class vec3:
             return vec3(self.x/other, self.y/other, self.z/other)
         else:
             return vec3(self.x/other.x, self.y/other.y, self.z/other.z)
+
 
     def __iadd__(self, other):
         if type(other) not in (vec3,int,float):

@@ -5,15 +5,15 @@ from raytracevec import vec3
 from raytraceray import ray
 import raytracevec
 
-def unit_vector(other):
-    if type(other) not in (vec3):
-        return NotImplemented
-    else:
-        return other / other.length()
+# Added this function to the main because it didn't work when included
+def unit_vector(v: vec3):
+    return v / v.length()
 
-def color(r):
+def color(r: vec3):
     unit_direction = unit_vector(r.direction())
-    t = 0.5 * (unit_direction.y() + 1.0)
+    # Found out that returning unit_direction.y() means something different
+    # in python than in C++. Fixed the function by removing () per blog site
+    t = 0.5 *(unit_direction.y + 1.0)
     return (1.0 - t) * vec3(1.0,1.0,1.0) + t * vec3(0.5, 0.7, 1.0)
 
 nx = 200
@@ -39,9 +39,9 @@ for j in range(0,ny) :
         r = ray(origin,lower_left_corner + horizontal*u + vertical*v)
         col = color(r)
         ir = int(255.99*col.x)
-        ig = int(255.99*col.y)
+        ig = 255 - int(255.99*col.y)
         ib = int(255.99*col.z)
 
         idraw.point((i,j),fill=(ir,ig,ib,255))
 
-mg.save(outfile)
+img.save(outfile)
